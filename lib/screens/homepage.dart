@@ -188,9 +188,26 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(
-                  image: AssetImage(cofe.imgUrl),
-                ),
+                Stack(children: [
+                  Image(
+                    image: AssetImage(cofe.imgUrl),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                        padding: EdgeInsets.all(1),
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15))),
+                        child: Image.asset(
+                          'assets/images/4.5.png',
+                          width: 40,
+                        )),
+                  )
+                ]),
                 Text(
                   cofe.name,
                   style:
