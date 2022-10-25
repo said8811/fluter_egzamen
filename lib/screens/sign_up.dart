@@ -6,6 +6,7 @@ import 'package:flutter_1_exam/screens/sign_in.dart';
 import 'package:flutter_1_exam/screens/splash.dart';
 import 'package:flutter_1_exam/util/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -238,6 +239,7 @@ class _SignUpState extends State<SignUp> {
                                           v2.length > 0 &&
                                           v3.length > 0 &&
                                           v4.length > 0) {
+                                        saveLogin();
                                         Navigator.pushNamed(
                                             context, RouteName.home);
                                       }
@@ -276,5 +278,10 @@ class _SignUpState extends State<SignUp> {
         ),
       )),
     );
+  }
+
+  void saveLogin() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    _pref.setBool("isLoggedIn", true);
   }
 }

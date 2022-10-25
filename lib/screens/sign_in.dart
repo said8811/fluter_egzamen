@@ -7,6 +7,7 @@ import 'package:flutter_1_exam/screens/sign_up.dart';
 import 'package:flutter_1_exam/screens/splash.dart';
 import 'package:flutter_1_exam/util/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -117,10 +118,10 @@ class _SignInState extends State<SignIn> {
                               prefixIcon: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.lock_outline_rounded,
                                     size: 23,
                                   ),
@@ -133,7 +134,7 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Text(
@@ -141,7 +142,7 @@ class _SignInState extends State<SignIn> {
                             style:
                                 GoogleFonts.poppins(color: Color(0xff324A59)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 134,
                           ),
                           Row(
@@ -158,11 +159,12 @@ class _SignInState extends State<SignIn> {
                                     onPressed: () {
                                       _formKey.currentState!.validate();
                                       if (vl.length > 0 && v2.length > 0) {
+                                        saveLogin();
                                         Navigator.pushNamed(
                                             context, RouteName.home);
                                       }
                                     },
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 30,
                                     )),
@@ -196,5 +198,10 @@ class _SignInState extends State<SignIn> {
         ),
       )),
     );
+  }
+
+  void saveLogin() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    _pref.setBool("isLoggedIn", true);
   }
 }
